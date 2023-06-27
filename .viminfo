@@ -6,20 +6,25 @@
 
 
 # hlsearch on (H) or off (h):
-~H
+~h
 # Last Search Pattern:
-~MSle0~/add_NeighList
+~MSle0~/\V\<Code\>
 
 # Last Substitute String:
 $
 
 # Command Line History (newest to oldest):
 :x
+:zoomin
+:Zoomin
+:zoomIn
+:ZoomOut
+:noh
+:nog
 :.x
 :X
 :x\
 :q
-:noh
 :d
 :D
 :dwp
@@ -58,51 +63,67 @@ $
 
 # Registers:
 "0	LINE	0
-			printf("Process %d printing data\n", pid);
+			/*************    Somewhere here build a neighbour list     **************/
+			//build_NeighList(x, y, z)
 ""1	LINE	0
-				add_NeigList(i, j);     
+			/*************    Somewhere here build a neighbour list     **************/
 "2	LINE	0
-			printf("Process %d printing data\n", pid);
-"3	LINE	0
-			for(int i =0;i<pid;++i) printf("%d\t", localBuf[i]);
-"4	LINE	0
-			printf("\n");
-"5	LINE	0
-		
-			printf("Process %d printing data\n", pid);
-"6	LINE	0
-		MPI_Barrier(MPI_COMM_WORLD);
-"7	LINE	0
-	  to = (myrank+1) * SIZE/P;
-"8	LINE	0
-	  from = myrank * SIZE/P;
-"9	LINE	0
 	
+		if(timestep % 20 == 0){
+"3	LINE	0
+	
+			
+"4	LINE	0
+		if(timestep % 20 == 0){
+"5	LINE	0
+		         if( i!=j ){
+"6	LINE	0
+				add_NeigList(i, j);     
+"7	LINE	0
+			printf("Process %d printing data\n", pid);
+"8	LINE	0
+			for(int i =0;i<pid;++i) printf("%d\t", localBuf[i]);
+"9	LINE	0
+			printf("\n");
 "q	CHAR	0
 	:q
 "x	CHAR	0
 	x
 "-	CHAR	0
-	p
+		
 
 # File marks:
-'0  301  21  ~/MD/Step4/MD-NVE-LJ.c
-'1  192  10  ~/MD/Step4/MD-NVE-LJ.c
-'2  207  22  ~/MD/Step4/MD-NVE-LJ.c
-'3  155  8  ~/MD/Step4/MD-NVE-LJ.c
-'4  178  4  ~/MD/Step3/Step3-Code1-Energy.c
-'5  228  0  ~/MD/Step3/Step3-Code2-Force.c
-'6  185  0  ~/MD/Step3/Step3-Code1-Energy.c
-'7  1  56  ~/MD/Step2/Step2-Code1-Init-Vel.c
-'8  46  0  ~/MD/Step1/Step1-Code1-InitPos-SC.c
-'9  41  0  ~/MPI/prefix_sum.c
+'0  368  0  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+'1  273  0  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+'2  277  7  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+'3  247  1  ~/MD/Step4/MD-NVE-LJ.c
+'4  1  21  ~/MD/Step4/MD-NVE-LJ.c
+'5  306  21  ~/MD/Step4/MD-NVE-LJ.c
+'6  192  10  ~/MD/Step4/MD-NVE-LJ.c
+'7  207  22  ~/MD/Step4/MD-NVE-LJ.c
+'8  155  8  ~/MD/Step4/MD-NVE-LJ.c
+'9  178  4  ~/MD/Step3/Step3-Code1-Energy.c
 
 # Jumplist (newest first):
--'  301  21  ~/MD/Step4/MD-NVE-LJ.c
+-'  368  0  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  273  5  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  238  3  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  251  1  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  277  7  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  256  3  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  254  0  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  261  1  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  294  4  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  263  23  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  296  23  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  300  4  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  1  0  ~/MD/Step4/MD-NVE-LJ_NeighList.c
+-'  247  1  ~/MD/Step4/MD-NVE-LJ.c
+-'  1  0  ~/MD/Step4/MD-NVE-LJ.c
+-'  306  21  ~/MD/Step4/MD-NVE-LJ.c
 -'  192  5  ~/MD/Step4/MD-NVE-LJ.c
 -'  207  3  ~/MD/Step4/MD-NVE-LJ.c
 -'  155  4  ~/MD/Step4/MD-NVE-LJ.c
--'  1  0  ~/MD/Step4/MD-NVE-LJ.c
 -'  178  4  ~/MD/Step3/Step3-Code1-Energy.c
 -'  185  0  ~/MD/Step3/Step3-Code1-Energy.c
 -'  228  0  ~/MD/Step3/Step3-Code2-Force.c
@@ -170,41 +191,92 @@ $
 -'  1  0  ~/MPI/mat_add.c
 -'  67  4  ~/MPI/mat_add.c
 -'  73  4  ~/MPI/mat_add.c
--'  63  3  ~/MPI/mat_add.c
--'  19  0  ~/MPI/mat_add.c
--'  30  0  ~/MPI/mat_add.c
--'  54  2  ~/MPI/mat_add.c
--'  8  13  ~/MPI/mat_add2.c
--'  1  0  ~/MPI/mat_add2.c
--'  52  2  ~/MPI/mat_add.c
--'  62  0  ~/MPI/mat_add.c
--'  2  0  ~/MPI/mat_add.c
--'  57  2  ~/MPI/mat_add.c
--'  25  0  ~/MPI/mat_add.c
--'  16  6  ~/MPI/mat_add.c
--'  51  2  ~/MPI/mat_add.c
--'  77  2  ~/MPI/mat_add.c
--'  70  1  ~/MPI/mat_mult.c
--'  1  0  ~/MPI/mat_mult
--'  2  0  ~/MPI/mat_mult
--'  6  0  ~/MPI/merge_sort.c
--'  1  0  ~/MPI/mat_mult.c
--'  2  0  ~/MPI/mat_mult_en.c
--'  1  0  ~/MPI/mat_mult_en.c
--'  128  20  ~/MPI/mat_mult.c
--'  147  0  ~/MPI/mat_mult.c
--'  15  0  ~/MD/Step1/Step1-Code1-InitPos-SC_tut.c
--'  18  1  ~/MD/Step1/Step1-Code1-InitPos-SC_tut.c
--'  15  33  ~/MD/Step6/submit.sh
+-'  247  1  ~/MD/Step4/MD-NVE-LJ.c
+-'  1  0  ~/MD/Step4/MD-NVE-LJ.c
+-'  306  21  ~/MD/Step4/MD-NVE-LJ.c
+-'  192  5  ~/MD/Step4/MD-NVE-LJ.c
+-'  207  3  ~/MD/Step4/MD-NVE-LJ.c
+-'  155  4  ~/MD/Step4/MD-NVE-LJ.c
+-'  178  4  ~/MD/Step3/Step3-Code1-Energy.c
+-'  185  0  ~/MD/Step3/Step3-Code1-Energy.c
+-'  228  0  ~/MD/Step3/Step3-Code2-Force.c
+-'  1  0  ~/MD/Step3/Step3-Code2-Force.c
+-'  1  0  ~/MD/Step3/Step3-Code1-Energy.c
+-'  1  56  ~/MD/Step2/Step2-Code1-Init-Vel.c
 
 # History of marks within files (newest to oldest):
 
+> ~/MD/Step4/MD-NVE-LJ_NeighList.c
+	"	368	0
+	^	273	0
+	.	236	34
+	+	260	4
+	+	263	21
+	+	263	1
+	+	316	1
+	+	264	107
+	+	265	1
+	+	294	5
+	+	294	2
+	+	266	5
+	+	296	0
+	+	296	0
+	+	296	0
+	+	266	0
+	+	263	0
+	+	294	4
+	+	294	4
+	+	158	9
+	+	263	0
+	+	262	0
+	+	254	0
+	+	254	0
+	+	262	0
+	+	239	31
+	+	240	24
+	+	251	53
+	+	256	0
+	+	257	0
+	+	243	1
+	+	251	0
+	+	244	0
+	+	251	20
+	+	249	1
+	+	251	6
+	+	249	7
+	+	251	3
+	+	245	89
+	+	246	68
+	+	247	1
+	+	250	0
+	+	253	31
+	+	295	3
+	+	254	8
+	+	258	11
+	+	265	41
+	+	261	4
+	+	238	0
+	+	236	7
+	+	236	4
+	+	237	3
+	+	234	22
+	+	236	34
+
 > ~/MD/Step4/MD-NVE-LJ.c
-	"	301	21
-	.	207	0
-	+	294	43
+	"	247	1
+	^	247	2
+	.	247	1
+	+	299	43
 	+	155	0
 	+	207	0
+	+	247	0
+	+	245	2
+	+	244	53
+	+	244	53
+	+	244	52
+	+	245	28
+	+	246	0
+	+	247	1
 
 > ~/MD/Step3/Step3-Code1-Energy.c
 	"	178	4
@@ -616,12 +688,3 @@ $
 	"	1	0
 	.	1	0
 	+	1	0
-
-> ~/MPI/mat_mult_en.c
-	"	6	0
-	^	6	1
-	.	6	0
-	+	9	0
-	+	8	1
-	+	7	9
-	+	6	0

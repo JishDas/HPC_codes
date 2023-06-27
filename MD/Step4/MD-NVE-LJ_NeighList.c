@@ -232,19 +232,37 @@ int main(int argc, char *argv[]){
 	      xold[i] = x[i];
 	      yold[i] = y[i];
 	      zold[i] = z[i];
-	   }
-	
-	   //NOW FIND THE FORCE FROM THE ABOVE NEW POSITION
-	   for(i=1;i<=num;i++){
-	      //SUM OVER NEIGHBOUR IS DONE SO MAKE IT ZERO
-	      Fxpar = 0.0;
-	      Fypar = 0.0;
-	      Fzpar = 0.0;
-		
-		/*************Somewhere here build a neighbour list**************/
-		//build_NeighList(x, y, z)
 
+	      i_list = build_NeighList(i, (x, y, z));
+	   }
+	   //NOW FIND THE FORCE FROM THE ABOVE NEW POSITION
+	//check for every 20 timesteps
+	if(timestep % 20 == 0){
+	
+	//if correction is needed then rebuild the neighbouring list
+	
+	//---------correction needed is a function that takes in old and new x coordinates and 
+	//---------gives out an array consisting of atleast 0 (default case) and if update needs
+	//---------to occur, it gives the list of elements in addition to 0
+	
+
+	i_array = correction_needed((x, y, z), (xold, yold, zold));
+
+	if(sizeof(i_array)>sizeof(int)){
+
+	// List needs to be updated now
+	   for(t=1;t<=size(i_array);t++){
+	      //SUM OVER NEIGHBOUR IS DONE SO MAKE IT ZERO
+		   Fxpar = 0.0;
+		   Fypar = 0.0;
+	           Fzpar = 0.0;
 		
+		/*************    Somewhere here build a neighbour list     **************/
+		//build_NeighList(x, y, z)
+		
+	//-----------check if any particle in the neighbouring list has moved more than 0.5*sigma---------------//
+	//-----------if moved update nighbouring list, and recalculate the forces, else use the old forces------//
+	    for(i = 1: i < i_list.head->data; ++i)	
 	      for(j=1;j<=num;j++){
 	         if( i!=j ){
 		   //BETTER TO BUILD A NEIGHBOURLIST THAN GOING THROUGH ALL PARTICLES
@@ -273,7 +291,8 @@ int main(int argc, char *argv[]){
 			  Forcezlj = 0.0;
 		     }
 		 }
-	      }
+	   }
+	  }	
 	      //NEW SET OF FORCES - USED TO CALCULATE THE NEW VELOCITIES
 	      Fx[i] = Fxpar;
    	      Fy[i] = Fypar;
@@ -294,7 +313,7 @@ int main(int argc, char *argv[]){
 	      vzold[i] = vz[i];
 	      
 	   }
-
+	}
 	   //THERMO OUTPUT
 	   //NEIGHBOUR list can be implemented here
 	   if(mdstep%10 == 0){

@@ -925,3 +925,53 @@ vim Step3-Code1-Energy.c
 ls
 vim Step3-Code2-Force.c 
 logout
+cd ./MD
+cd Step3
+ls
+vim Step3-Code1-Energy.c 
+cd ..
+cd Step4/
+ls
+vim MD-NVE-LJ.c 
+cd ..
+
+cd MD/Step4
+ls
+vim MD-NVE-LJ.c 
+cd ..
+git init
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/JishDas/HPC_codes.git
+git push -u origin main
+git branch -M master
+git branch -M main
+git push origin main
+git commit -m "initial commit"
+git add
+git add .
+git push -u origin master
+git push -u origin main
+git commit -m "initial commit"
+git push origin main
+git show-ref
+git push origin HEAD:master
+vim ./MD/Step4/MD-NVE-LJ.c 
+logout
+cd MD/
+cd Step4
+ls
+vim MD-NVE-LJ.c 
+cp -r MD-NVE-LJ.c MD-NVE-LJ_NeighList.c
+ls
+vim MD-NVE-LJ_NeighList.c 
+logout
+vim ./MD/Step4/MD-NVE-LJ_NeighList.c 
+logout
+cd MD/
+cd Step4
+ls
+emacs MD-NVE-LJ_NeighList.c 
+jupyter notebook --no-browser --port=8080
+logout
+logout
